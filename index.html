@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="An interactive quiz application with timed questions, instant feedback, score tracking, and a responsive design."
+    >
+
+    <title>QuizMaster | Interactive Quiz</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <main class="app-container">
+        <header class="app-header">
+            <a href="#" class="brand" aria-label="QuizMaster home">
+                <span class="brand-icon">Q</span>
+                <span>Quiz<span class="brand-highlight">Master</span></span>
+            </a>
+
+            <div class="header-badge">
+                <span class="status-dot"></span>
+                Interactive Quiz
+            </div>
+        </header>
+
+        <section class="quiz-card" id="quizCard">
+            <div class="welcome-screen" id="welcomeScreen">
+                <div class="hero-icon" aria-hidden="true">🧠</div>
+
+                <p class="eyebrow">CHALLENGE YOURSELF</p>
+
+                <h1>Test Your <span>Knowledge.</span></h1>
+
+                <p class="welcome-description">
+                    Challenge your mind with a quick quiz.
+                    Answer each question before time runs out
+                    and see how high you can score.
+                </p>
+
+                <div class="quiz-info">
+                    <div class="info-item">
+                        <span class="info-icon">❓</span>
+                        <div>
+                            <strong id="questionInfo">10 Questions</strong>
+                            <small>Multiple choice</small>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-icon">⏱️</span>
+                        <div>
+                            <strong>15 Seconds</strong>
+                            <small>Per question</small>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-icon">🏆</span>
+                        <div>
+                            <strong>Earn Points</strong>
+                            <small>Test your skills</small>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="primary-button" id="startButton">
+                    Start Quiz
+                    <span aria-hidden="true">→</span>
+                </button>
+
+                <p class="welcome-note">
+                    No pressure. Just learning and fun.
+                </p>
+            </div>
+
+            <section class="quiz-screen" id="quizScreen" hidden>
+                <div class="quiz-topbar">
+                    <div class="question-counter">
+                        QUESTION
+                        <strong id="questionNumber">01</strong>
+                        <span>/</span>
+                        <span id="totalQuestions">10</span>
+                    </div>
+
+                    <div class="score-display">
+                        <span aria-hidden="true">⭐</span>
+                        Score:
+                        <strong id="currentScore">0</strong>
+                    </div>
+                </div>
+
+                <div
+                    class="progress-track"
+                    role="progressbar"
+                    aria-label="Quiz progress"
+                    aria-valuemin="0"
+                    aria-valuemax="10"
+                    aria-valuenow="0"
+                    id="progressTrack"
+                >
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+
+                <div class="timer-row">
+                    <span class="timer-label">Time remaining</span>
+
+                    <div
+                        class="timer-display"
+                        id="timerDisplay"
+                        role="timer"
+                        aria-label="15 seconds remaining"
+                    >
+                        <span aria-hidden="true">◷</span>
+                        <strong id="timerValue">15</strong>
+                        <span>sec</span>
+                    </div>
+                </div>
+
+                <div class="question-area">
+                    <p class="question-category" id="questionCategory">
+                        GENERAL KNOWLEDGE
+                    </p>
+
+                    <h2 id="questionText">Question goes here?</h2>
+
+                    <div
+                        class="options-container"
+                        id="optionsContainer"
+                        aria-label="Answer options"
+                    ></div>
+
+                    <p
+                        class="feedback-message"
+                        id="feedbackMessage"
+                        role="status"
+                        aria-live="polite"
+                    ></p>
+                </div>
+
+                <div class="quiz-footer">
+                    <span class="footer-hint" id="footerHint">
+                        Select the correct answer
+                    </span>
+
+                    <button
+                        type="button"
+                        class="primary-button next-button"
+                        id="nextButton"
+                        disabled
+                    >
+                        Next Question
+                        <span aria-hidden="true">→</span>
+                    </button>
+                </div>
+            </section>
+
+            <section class="result-screen" id="resultScreen" hidden>
+                <div class="result-icon" id="resultIcon" aria-hidden="true">
+                    🏆
+                </div>
+
+                <p class="eyebrow">QUIZ COMPLETED</p>
+
+                <h2 id="resultHeading">Amazing Work!</h2>
+
+                <p class="result-description" id="resultDescription">
+                    You completed the quiz.
+                </p>
+
+                <div class="result-score-card">
+                    <span>Your Final Score</span>
+
+                    <div class="final-score">
+                        <strong id="finalScore">0</strong>
+                        <span id="scoreDivider">/ 10</span>
+                    </div>
+
+                    <div class="result-progress-track">
+                        <div
+                            class="result-progress-fill"
+                            id="resultProgressFill"
+                        ></div>
+                    </div>
+
+                    <strong class="result-percentage" id="resultPercentage">
+                        0%
+                    </strong>
+                </div>
+
+                <div class="result-stats">
+                    <div class="result-stat correct-stat">
+                        <span>✓</span>
+                        <strong id="correctAnswers">0</strong>
+                        <small>Correct</small>
+                    </div>
+
+                    <div class="result-stat incorrect-stat">
+                        <span>✕</span>
+                        <strong id="incorrectAnswers">0</strong>
+                        <small>Incorrect</small>
+                    </div>
+
+                    <div class="result-stat best-stat">
+                        <span>★</span>
+                        <strong id="bestScore">0</strong>
+                        <small>Best Score</small>
+                    </div>
+                </div>
+
+                <button
+                    type="button"
+                    class="primary-button restart-button"
+                    id="restartButton"
+                >
+                    <span aria-hidden="true">↻</span>
+                    Try Again
+                </button>
+            </section>
+        </section>
+
+        <footer class="app-footer">
+            <span>Built with HTML, CSS & JavaScript</span>
+            <span>Learn something new every day ✨</span>
+            <span>MUKESH</span>
+        </footer>
+    </main>
+</body>
+</html>
+
